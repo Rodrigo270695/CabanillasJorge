@@ -3,6 +3,9 @@ package capadatos;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class Conexion {
 
@@ -15,11 +18,15 @@ public class Conexion {
         Connection con = null;
 
         try {
+            
+            Class.forName("org.postgresql.Driver");
 
             con = DriverManager.getConnection(URL, USER, PASS);
             
         } catch (SQLException e) {
             e.printStackTrace(System.err);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return con;
